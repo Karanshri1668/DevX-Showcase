@@ -1,4 +1,4 @@
-const GITHUB_USERNAME = 'karanshri1668';
+const GITHUB_USERNAME = 'Karanshri1668';
 
         async function fetchGitHubProjects() {
             const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
