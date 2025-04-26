@@ -13,9 +13,6 @@ async function fetchGitHubProjects() {
     };
 
     repos.forEach(repo => {
-        // Use specific image if available, otherwise use a default placeholder
-        // const imageUrl = projectImages[repo.name] || 
-        //                 `https://via.placeholder.com/300x200?text=${encodeURIComponent(repo.name)}`;
         const imageUrl = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`;
         
         const projectCard = document.createElement('div');
