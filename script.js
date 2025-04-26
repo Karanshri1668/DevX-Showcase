@@ -1,25 +1,39 @@
-const GITHUB_USERNAME = 'Karanshri1668';
+const GITHUB_USERNAME = 'karanshri1668';
 
-        async function fetchGitHubProjects() {
-            const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
-            const repos = await response.json();
-            const projectList = document.getElementById('project-list');
+async function fetchGitHubProjects() {
+    const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+    const repos = await response.json();
+    const projectList = document.getElementById('project-list');
 
-            repos.forEach(repo => {
-                const projectCard = document.createElement('div');
-                projectCard.className = 'col-md-4';
-                projectCard.innerHTML = `
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">${repo.name}</h5>
-                            <p class="card-text">${repo.description || 'No description available.'}</p>
-                            <a href="${repo.html_url}" class="btn btn-primary" target="_blank">View on GitHub</a>
-                        </div>
-                    </div>`;
-                projectList.appendChild(projectCard);
-            });
-        }
+    // Map of specific repo names to image URLs (you can add more)
+    const projectImages = {
+        'repo1': 'https://via.placeholder.com/300x200?text=Project+1',
+        'repo2': 'https://via.placeholder.com/300x200?text=Project+2',
+        // Add more mappings as needed
+    };
 
+    repos.forEach(repo => {
+        // Use specific image if available, otherwise use a default placeholder
+        // const imageUrl = projectImages[repo.name] || 
+        //                 `https://via.placeholder.com/300x200?text=${encodeURIComponent(repo.name)}`;
+        const imageUrl = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`;
+        
+        const projectCard = document.createElement('div');
+        projectCard.className = 'col-md-4 mb-4';
+        projectCard.innerHTML = `
+            <div class="card h-100">
+                <img src="${imageUrl}" class="card-img-top" alt="${repo.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${repo.name}</h5>
+                    <p class="card-text">${repo.description || 'No description available.'}</p>
+                    <a href="${repo.html_url}" class="btn btn-primary" target="_blank">View on GitHub</a>
+                </div>
+            </div>`;
+        projectList.appendChild(projectCard);
+    });
+}
+
+// Rest of your JavaScript remains the same
         function animateSections() {
             const sections = document.querySelectorAll('.section');
             const observer = new IntersectionObserver((entries, observer) => {
@@ -29,7 +43,7 @@ const GITHUB_USERNAME = 'Karanshri1668';
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.3 });
 
             sections.forEach(section => {
                 observer.observe(section);
