@@ -38,6 +38,23 @@ body {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+/* Add these styles to your existing CSS */
+#projects .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#projects .card {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#projects .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
 .skills ul {
     display: flex;
     flex-wrap: wrap;
