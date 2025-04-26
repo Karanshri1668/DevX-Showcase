@@ -1,7 +1,8 @@
 const GITHUB_USERNAME = 'karanshri1668';
 
 async function fetchGitHubProjects() {
-    const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+    try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
     const repos = await response.json();
     const projectList = document.getElementById('project-list');
 
@@ -16,7 +17,7 @@ async function fetchGitHubProjects() {
         const imageUrl = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`;
         
         const projectCard = document.createElement('div');
-        projectCard.className = 'col-md-4 mb-4';
+        projectCard.className = 'col-12 col-md-4';  // Add col-12 for mobile
         projectCard.innerHTML = `
             <div class="card h-100">
                 <img src="${imageUrl}" class="card-img-top" alt="${repo.name}">
@@ -28,7 +29,14 @@ async function fetchGitHubProjects() {
             </div>`;
         projectList.appendChild(projectCard);
     });
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        document.getElementById('project-list').innerHTML = 
+            '<p class="text-center">Unable to load projects. Please check your connection.</p>';
+    }
+    
 }
+
 
 // Rest of your JavaScript remains the same
         function animateSections() {
